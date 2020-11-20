@@ -16,7 +16,7 @@ namespace CabInvoiceGenerator
         
         }
 
-        public double calculateFare(Ride[] rides)
+        public InvoiceSummary calculateFare(Ride[] rides)
         {
 
             double totalFare = 0;
@@ -24,7 +24,7 @@ namespace CabInvoiceGenerator
                 double fare = calculateFare(ride.distance, ride.time);
                  totalFare = totalFare + fare;
             }
-            return totalFare;
+            return new InvoiceSummary(rides.Length,totalFare,totalFare/rides.Length);
         }
     }
 }

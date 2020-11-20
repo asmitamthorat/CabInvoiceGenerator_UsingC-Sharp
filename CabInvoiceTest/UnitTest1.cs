@@ -25,14 +25,25 @@ namespace CabInvoiceTest
             Assert.AreEqual(5, fare);
         }
 
+        
         [Test]
         public void givenMultipleRide_shouldReturnInvoice() {
             Ride[] rides = { new Ride(2.0, 5), new Ride(2.0, 5) };
             Invoicegenerator invoiceGenerator = new Invoicegenerator();
-            double fare = invoiceGenerator.calculateFare(rides);
-            Assert.AreEqual(50, fare);
+            InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
+            Assert.AreEqual(50, summary);
+        }
+        
 
+        [Test]
 
+        public void givenMultipleRide_shouldReturnInvoiceSummary()
+        {
+            Ride[] rides = { new Ride(2.0, 5), new Ride(2.0, 5) };
+            InvoiceSummary Expectedsummary = new InvoiceSummary(2,50,25);
+            Invoicegenerator invoiceGenerator = new Invoicegenerator();
+            InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
+            Assert.AreEqual(Expectedsummary, summary);
         }
     }
 }
