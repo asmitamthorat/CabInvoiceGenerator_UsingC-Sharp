@@ -15,5 +15,24 @@ namespace CabInvoiceTest
             double fare=invoiceGenerator.calculateFare(distance,time);
             Assert.AreEqual(25, fare);
         }
+
+        [Test]
+        public void givenless_DistanceAndTime_ShouldReturnMinimumFare() {
+            Invoicegenerator invoiceGenerator = new Invoicegenerator();
+            double distance = 0.1;
+            int time = 1;
+            double fare = invoiceGenerator.calculateFare(distance, time);
+            Assert.AreEqual(5, fare);
+        }
+
+        [Test]
+        public void givenMultipleRide_shouldReturnInvoice() {
+            Ride[] rides = { new Ride(2.0, 5), new Ride(2.0, 5) };
+            Invoicegenerator invoiceGenerator = new Invoicegenerator();
+            double fare = invoiceGenerator.calculateFare(rides);
+            Assert.AreEqual(50, fare);
+
+
+        }
     }
 }
