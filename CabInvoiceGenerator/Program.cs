@@ -8,6 +8,8 @@ namespace CabInvoiceGenerator
         {
             Console.WriteLine("Hello World!");
             Console.WriteLine("welcome to cab invoice Generator");
+            RideRepository rideRepository = new RideRepository();
+            rideRepository.getInvoiceSummary( "asd");
         }
     }
 }
