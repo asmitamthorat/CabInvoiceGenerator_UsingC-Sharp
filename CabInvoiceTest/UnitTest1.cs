@@ -43,7 +43,7 @@ namespace CabInvoiceTest
         
 
         [Test]
-        public void sd() {
+        public void GivenPremiumRide_WhenToCalculateFare_ShouldReturnPremiumFare() {
             string userID = "sangli";
             List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
             RideRepository rideRepository = new RideRepository();
@@ -55,7 +55,7 @@ namespace CabInvoiceTest
         
 
         [Test]
-        public void asj() {
+        public void GivenNormalRide_WhenToCalculateFare_ShouldReturnNormalFare() {
 
             string userID = "sangli";
             List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
@@ -67,7 +67,7 @@ namespace CabInvoiceTest
         }
 
         [Test]
-        public void adaa() {
+        public void givenUserId_WhenInCorrect_ShouldThrowInvalidUserException() {
             try {
                 string userID = "pune";
                 List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
@@ -86,7 +86,7 @@ namespace CabInvoiceTest
 
 
         [Test]
-        public void asdgsdaa()
+        public void givenUserId_WhenInblank_ShouldThrowblankUserException()
         {
             try
             {
