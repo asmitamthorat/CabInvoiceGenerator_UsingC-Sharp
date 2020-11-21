@@ -27,12 +27,12 @@ namespace CabInvoiceGenerator
             return new InvoiceSummary(rides.Length,totalFare,totalFare/rides.Length);
         }
 
-        internal InvoiceSummary calculateFare(List<Ride> rides)
+        internal InvoiceSummary calculateFare(List<Ride> rides,RideType rideType)
         {
             double totalFare = 0;
             foreach (Ride ride in rides)
             {
-                double fare = calculateFare(ride.distance, ride.time);
+                double fare = Fare.CalculateFare(rideType,ride.distance, ride.time);
                 totalFare = totalFare + fare;
             }
             return new InvoiceSummary(rides.Count, totalFare, totalFare / rides.Count);

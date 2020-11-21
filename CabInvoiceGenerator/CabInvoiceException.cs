@@ -9,7 +9,7 @@ namespace CabInvoiceGenerator
         public enum ExceptionType
         {
 
-            INVAILD_USERID
+            INVAILD_USERID,INVAILD_RIDE_TYPE,BLANK_USERID
         }
         public readonly ExceptionType type;
         public CabInvoiceException(ExceptionType type, string message) : base(message)

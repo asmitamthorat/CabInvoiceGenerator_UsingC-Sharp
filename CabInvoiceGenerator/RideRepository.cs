@@ -10,18 +10,26 @@ namespace CabInvoiceGenerator
 
        public void  addUser(string userID, List<Ride> rides) {
 
+            if (userID.Length==0)
+            {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.BLANK_USERID, "Provided user ID is empty");
+
+            }
+
             rideRepo.Add(userID, rides);
         
         }
 
-        public InvoiceSummary getInvoiceSummary(string userID)
+        public InvoiceSummary getInvoiceSummary(string userID,RideType rideType)
         {
-           // List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
-           // rideRepo.Add("sangli", rides);
+            if (!rideRepo.ContainsKey(userID)) {
+                throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVAILD_USERID, "Provided user ID is empty");
+            
+            }
 
             Invoicegenerator invoicegenerator = new Invoicegenerator();
-            InvoiceSummary  invoiceSummary=invoicegenerator.calculateFare(rideRepo[userID]);
-           // Console.WriteLine(rideRepo["sangli"]);
+            InvoiceSummary  invoiceSummary=invoicegenerator.calculateFare(rideRepo[userID],rideType);
+            
             return invoiceSummary;
            
             

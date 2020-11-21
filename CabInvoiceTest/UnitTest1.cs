@@ -26,15 +26,7 @@ namespace CabInvoiceTest
             Assert.AreEqual(5, fare);
         }
 
-        /*
-        [Test]
-        public void givenMultipleRide_shouldReturnInvoice() {
-            Ride[] rides = { new Ride(2.0, 5), new Ride(2.0, 5) };
-            Invoicegenerator invoiceGenerator = new Invoicegenerator();
-            InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
-            Assert.AreEqual(50, summary);
-        }
-        */
+      
         
 
         [Test]
@@ -48,24 +40,72 @@ namespace CabInvoiceTest
             Assert.AreEqual(Expectedsummary, summary);
         }
 
+        
+
         [Test]
         public void sd() {
             string userID = "sangli";
-
-
             List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
-                
-                
-                
-               
-           
             RideRepository rideRepository = new RideRepository();
-           rideRepository.addUser(userID, rides);
-            InvoiceSummary summary = rideRepository.getInvoiceSummary("sangli");
+            rideRepository.addUser(userID, rides);
+            InvoiceSummary summary = rideRepository.getInvoiceSummary("sangli",RideType.PREMIUM_RIDE);
+            InvoiceSummary Expectedsummary = new InvoiceSummary(2,80 ,40 );
+            Assert.AreEqual(Expectedsummary, summary);
+        }
+        
+
+        [Test]
+        public void asj() {
+
+            string userID = "sangli";
+            List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
+            RideRepository rideRepository = new RideRepository();
+            rideRepository.addUser(userID, rides);
+            InvoiceSummary summary = rideRepository.getInvoiceSummary("sangli",RideType.NORMAL_RIDE);
             InvoiceSummary Expectedsummary = new InvoiceSummary(2, 50, 25);
             Assert.AreEqual(Expectedsummary, summary);
+        }
+
+        [Test]
+        public void adaa() {
+            try {
+                string userID = "pune";
+                List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
+                RideRepository rideRepository = new RideRepository();
+                rideRepository.addUser(userID, rides);
+                InvoiceSummary summary = rideRepository.getInvoiceSummary("sangli", RideType.NORMAL_RIDE);
+            }
+            catch (CabInvoiceException e) {
+                Assert.AreEqual(CabInvoiceException.ExceptionType.INVAILD_USERID, e.type);
+            
+            }
+        
+        
+        }
+
+
+
+        [Test]
+        public void asdgsdaa()
+        {
+            try
+            {
+                string userID = "";
+                List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
+                RideRepository rideRepository = new RideRepository();
+                rideRepository.addUser(userID, rides);
+                
+            }
+            catch (CabInvoiceException e)
+            {
+                Assert.AreEqual(CabInvoiceException.ExceptionType.BLANK_USERID, e.type);
+
+            }
 
 
         }
+
+
+
     }
 }
