@@ -8,7 +8,15 @@ namespace CabInvoiceGenerator
     {
         public Dictionary<string, List<Ride>> rideRepo = new Dictionary<string,List<Ride>>();
 
-       public void  addUser(string userID, List<Ride> rides) {
+
+
+        /// <summary>
+        /// Adds the user.
+        /// </summary>
+        /// <param name="userID">The user identifier.</param>
+        /// <param name="rides">The rides.</param>
+        /// <exception cref="CabInvoiceGenerator.CabInvoiceException">Provided user ID is empty</exception>
+        public void  AddUser(string userID, List<Ride> rides) {
 
             if (userID.Length==0)
             {
@@ -20,7 +28,14 @@ namespace CabInvoiceGenerator
         
         }
 
-        public InvoiceSummary getInvoiceSummary(string userID,RideType rideType)
+        /// <summary>
+        /// Gets the invoice summary.
+        /// </summary>
+        /// <param name="userID">The user identifier.</param>
+        /// <param name="rideType">Type of the ride.</param>
+        /// <returns></returns>
+        /// <exception cref="CabInvoiceGenerator.CabInvoiceException">Provided user ID is empty</exception>
+        public InvoiceSummary GetInvoiceSummary(string userID,RideType rideType)
         {
             if (!rideRepo.ContainsKey(userID)) {
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVAILD_USERID, "Provided user ID is empty");
@@ -28,15 +43,9 @@ namespace CabInvoiceGenerator
             }
 
             Invoicegenerator invoicegenerator = new Invoicegenerator();
-            InvoiceSummary  invoiceSummary=invoicegenerator.calculateFare(rideRepo[userID],rideType);
+            InvoiceSummary  invoiceSummary=invoicegenerator.CalculateFare(rideRepo[userID],rideType);
             
             return invoiceSummary;
-           
-            
-           
-
-
-
         }
     }
 }

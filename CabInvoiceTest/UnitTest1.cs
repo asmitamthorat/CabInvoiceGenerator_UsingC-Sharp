@@ -13,7 +13,7 @@ namespace CabInvoiceTest
             Invoicegenerator invoiceGenerator = new Invoicegenerator();
             double distance = 2.0;
             int time = 5;
-            double fare=invoiceGenerator.calculateFare(distance,time);
+            double fare=invoiceGenerator.CalculateFare(distance,time);
             Assert.AreEqual(25, fare);
         }
 
@@ -22,21 +22,18 @@ namespace CabInvoiceTest
             Invoicegenerator invoiceGenerator = new Invoicegenerator();
             double distance = 0.1;
             int time = 1;
-            double fare = invoiceGenerator.calculateFare(distance, time);
+            double fare = invoiceGenerator.CalculateFare(distance, time);
             Assert.AreEqual(5, fare);
-        }
-
-      
-        
-
+        }     
+       
         [Test]
 
         public void givenMultipleRide_shouldReturnInvoiceSummary()
         {
-            Ride[] rides = { new Ride(2.0, 5), new Ride(2.0, 5) };
+            List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
             InvoiceSummary Expectedsummary = new InvoiceSummary(2,50,25);
             Invoicegenerator invoiceGenerator = new Invoicegenerator();
-            InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
+            InvoiceSummary summary = invoiceGenerator.CalculateFare(rides,RideType.NORMAL_RIDE);
             Assert.AreEqual(Expectedsummary, summary);
         }
 
@@ -47,8 +44,8 @@ namespace CabInvoiceTest
             string userID = "sangli";
             List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
             RideRepository rideRepository = new RideRepository();
-            rideRepository.addUser(userID, rides);
-            InvoiceSummary summary = rideRepository.getInvoiceSummary("sangli",RideType.PREMIUM_RIDE);
+            rideRepository.AddUser(userID, rides);
+            InvoiceSummary summary = rideRepository.GetInvoiceSummary("sangli",RideType.PREMIUM_RIDE);
             InvoiceSummary Expectedsummary = new InvoiceSummary(2,80 ,40 );
             Assert.AreEqual(Expectedsummary, summary);
         }
@@ -60,8 +57,8 @@ namespace CabInvoiceTest
             string userID = "sangli";
             List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
             RideRepository rideRepository = new RideRepository();
-            rideRepository.addUser(userID, rides);
-            InvoiceSummary summary = rideRepository.getInvoiceSummary("sangli",RideType.NORMAL_RIDE);
+            rideRepository.AddUser(userID, rides);
+            InvoiceSummary summary = rideRepository.GetInvoiceSummary("sangli",RideType.NORMAL_RIDE);
             InvoiceSummary Expectedsummary = new InvoiceSummary(2, 50, 25);
             Assert.AreEqual(Expectedsummary, summary);
         }
@@ -72,14 +69,13 @@ namespace CabInvoiceTest
                 string userID = "pune";
                 List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
                 RideRepository rideRepository = new RideRepository();
-                rideRepository.addUser(userID, rides);
-                InvoiceSummary summary = rideRepository.getInvoiceSummary("sangli", RideType.NORMAL_RIDE);
+                rideRepository.AddUser(userID, rides);
+                InvoiceSummary summary = rideRepository.GetInvoiceSummary("sangli", RideType.NORMAL_RIDE);
             }
             catch (CabInvoiceException e) {
                 Assert.AreEqual(CabInvoiceException.ExceptionType.INVAILD_USERID, e.type);
             
-            }
-        
+            }  
         
         }
 
@@ -93,7 +89,7 @@ namespace CabInvoiceTest
                 string userID = "";
                 List<Ride> rides = new List<Ride> { new Ride(2.0, 5), new Ride(2.0, 5) };
                 RideRepository rideRepository = new RideRepository();
-                rideRepository.addUser(userID, rides);
+                rideRepository.AddUser(userID, rides);
                 
             }
             catch (CabInvoiceException e)
@@ -101,11 +97,6 @@ namespace CabInvoiceTest
                 Assert.AreEqual(CabInvoiceException.ExceptionType.BLANK_USERID, e.type);
 
             }
-
-
         }
-
-
-
     }
 }

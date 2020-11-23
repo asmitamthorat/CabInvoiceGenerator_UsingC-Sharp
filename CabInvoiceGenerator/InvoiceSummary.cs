@@ -10,6 +10,13 @@ namespace CabInvoiceGenerator
         public double totalFare;
         public double avgFarePerRide;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InvoiceSummary"/> class.
+        /// </summary>
+        /// <param name="numberOfRide">The number of ride.</param>
+        /// <param name="totalFare">The total fare.</param>
+        /// <param name="avgFarePerRide">The average fare per ride.</param>
+
         public InvoiceSummary(int numberOfRide, double totalFare, double avgFarePerRide)
         {
             this.numberOfRide = numberOfRide;
